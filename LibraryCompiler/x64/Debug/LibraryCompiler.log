@@ -1,2 +1,3 @@
 ﻿  main.cpp
+C:\Users\Usuario\repo\AdvGraphics\LibraryCompiler\main.cpp(176,49): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
   LibraryCompiler.vcxproj -> C:\Users\Usuario\repo\AdvGraphics\LibraryCompiler\x64\Debug\LibraryCompiler.exe
