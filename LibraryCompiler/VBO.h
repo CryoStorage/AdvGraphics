@@ -10,7 +10,7 @@ public:
     GLuint ID;
 
     // Constructor que genera un Vertex Buffer Object y lo enlaza a los indices
-    VBO(GLuint* indices, GLsizeiptr size);
+    VBO(GLfloat *vertices, GLsizeiptr size);
 
     void Bind();
     void Unbind();

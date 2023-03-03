@@ -72,13 +72,13 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <PublicIncludeDirectories>C:\Users\Usuario\repo\LibraryCompiler\lib;$(PublicIncludeDirectories)</PublicIncludeDirectories>
-    <LibraryPath>C:\Users\Usuario\repo\AdvGraphics\LibraryCompiler\lib;$(LibraryPath)</LibraryPath>
-    <IncludePath>C:\Users\Usuario\repo\AdvGraphics\LibraryCompiler\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Verde3\repo\AdvGraphics\LibraryCompiler\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\Verde3\repo\AdvGraphics\LibraryCompiler\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <PublicIncludeDirectories>C:\Users\Usuario\repo\LibraryCompiler\lib;$(PublicIncludeDirectories)</PublicIncludeDirectories>
-    <LibraryPath>C:\Users\Usuario\repo\AdvGraphics\LibraryCompiler\lib;$(LibraryPath)</LibraryPath>
-    <IncludePath>C:\Users\Usuario\repo\AdvGraphics\LibraryCompiler\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Verde3\repo\AdvGraphics\LibraryCompiler\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\Verde3\repo\AdvGraphics\LibraryCompiler\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
