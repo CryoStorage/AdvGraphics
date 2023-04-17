@@ -1,2 +1,0 @@
-C:\Users\Usuario\repo\LibraryCompiler\x64\Debug\LibraryCompiler.exe
-C:\Users\Usuario\repo\AdvGraphics\LibraryCompiler\x64\Debug\LibraryCompiler.exe
