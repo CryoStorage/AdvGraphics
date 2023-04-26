@@ -857,6 +857,7 @@ GameObject:
   - component: {fileID: 1595211416}
   - component: {fileID: 1595211415}
   - component: {fileID: 1595211414}
+  - component: {fileID: 1595211417}
   - component: {fileID: 1595211413}
   - component: {fileID: 1595211412}
   - component: {fileID: 1595211411}
@@ -970,6 +971,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1595211417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1595211410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8159609c34f4604eb10020a3f3d1697, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1867492422
 GameObject:
   m_ObjectHideFlags: 0
@@ -1091,6 +1104,7 @@ GameObject:
   - component: {fileID: 2098907743}
   - component: {fileID: 2098907742}
   - component: {fileID: 2098907741}
+  - component: {fileID: 2098907744}
   - component: {fileID: 2098907740}
   m_Layer: 0
   m_Name: Quad
@@ -1178,3 +1192,15 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2098907744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2098907739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8159609c34f4604eb10020a3f3d1697, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
