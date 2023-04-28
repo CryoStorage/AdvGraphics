@@ -1,10 +1,10 @@
-Shader "Unlit/Transition"
+Shader "Unlit/Dissolve"
 {
     Properties
     {
-        _Tex1 ("Texture1", 2D) = "white" {}
-        _Tex2 ("Texture2", 2D) = "white" {}
-        _blendValue ("BlendValue", Range(0, 1)) = 0.5
+        _MainTex ("Texture", 2D) = "white" {}
+        _NoiseTex ("Texture", 2D) = "white" {}
+        _ThreshHold ("ThreshHold", Float) = 0.5
     }
     SubShader
     {
@@ -34,27 +34,33 @@ Shader "Unlit/Transition"
                 float4 vertex : SV_POSITION;
             };
 
-            sampler2D _Tex1;
-            sampler2D _Tex2;
-            // float4 _MainTex_ST;
-            float _blendValue;
+            sampler2D _MainTex;
+            float4 _MainTex_ST;
+            sampler2D _NoiseTex;
+            float _ThreshHold;
 
             v2f vert (appdata v)
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = (v.uv);
+                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
                 UNITY_TRANSFER_FOG(o,o.vertex);
                 return o;
             }
 
             fixed4 frag (v2f i) : SV_Target
             {
-                _blendValue = sin(_Time.y) * .5f + .5f;
-                fixed4 col1 = tex2D(_Tex1, i.uv);
-                fixed4 col2 = tex2D(_Tex2, i.uv);
-                return lerp(col1, col2, _blendValue);
-                
+                _ThreshHold = sin(_Time.y) * .5f + .5f;
+                // sample the texture
+                fixed4 col = tex2D(_MainTex, i.uv);
+                fixed4 noise = tex2D(_NoiseTex, i.uv);
+                if(noise.r < _ThreshHold)
+                {
+                    discard;
+                }
+                // apply fog
+                UNITY_APPLY_FOG(i.fogCoord, col);
+                return col;
             }
             ENDCG
         }

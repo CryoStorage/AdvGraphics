@@ -3,7 +3,8 @@ Shader "Unlit/TextureScroll"
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
-        _ScrollSpeed ("Scroll X", Float) = 0.0
+        _ScrollSpeedX ("Scroll X", Float) = 0
+        _ScrollSpeedY ("Scroll Y", Float)= 0  
     }
     SubShader
     {
@@ -35,6 +36,9 @@ Shader "Unlit/TextureScroll"
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
+            float _ScrollSpeedX;
+            float _ScrollSpeedY;
+            float _time;
 
             v2f vert (appdata v)
             {
@@ -47,10 +51,11 @@ Shader "Unlit/TextureScroll"
 
             fixed4 frag (v2f i) : SV_Target
             {
-                // sample the texture
-                fixed4 col = tex2D(_MainTex, i.uv);
                 // apply fog
+                i.uv.y += _Time * _ScrollSpeedY; 
+                i.uv.x += _Time * _ScrollSpeedX; 
                 UNITY_APPLY_FOG(i.fogCoord, col);
+                fixed4 col = tex2D(_MainTex, i.uv);
                 return col;
             }
             ENDCG
