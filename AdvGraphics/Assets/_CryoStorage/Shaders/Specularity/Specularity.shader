@@ -4,8 +4,6 @@ Shader "Custom/Specularity"
     {
         _Color ("Color", Color) = (1,1,1,1)
         _MainTex ("Albedo (RGB)", 2D) = "white" {}
-        _Glossiness ("Smoothness", Range(0,1)) = 0.5
-        _Metallic ("Metallic", 2D) = "white" {}
         _Specular ("Specular", 2D) = "white" {}
         _Shininess ("Shininess", Range(0, 1)) = 0.5
     }
@@ -28,14 +26,12 @@ Shader "Custom/Specularity"
             float2 uv_MainTex;
             float3 WorldPos;
             float3 _LightPos;
-            
         };
 
-        half _Glossiness;
         float2 _Metallic;
         fixed4 _Color;
         float _Shininess;
-        sampler2D _specular;
+        sampler2D _Specular;
 
         // Add instancing support for this shader. You need to check 'Enable Instancing' on materials that use the shader.
         // See https://docs.unity3d.com/Manual/GPUInstancing.html for more information about instancing.
@@ -46,20 +42,22 @@ Shader "Custom/Specularity"
 
         void surf (Input IN, inout SurfaceOutputStandard o)
         {
+            // get the direction from the light to the surface
+            float3 lightPos = normalize(_WorldSpaceLightPos0 - IN.WorldPos);
+            // get the direction from the camera to the surface
             float3 screenPos = normalize(_WorldSpaceCameraPos - IN.WorldPos);
-            half screenSpaceDir = max(0, dot(IN.WorldPos, screenPos));
-            float abs = max(0, dot(o.Normal, screenSpaceDir));
-            float shine = pow(abs, _Shininess);
+            // get the angle between the light and surface directions
+            float3 screenSpaceDir = normalize(screenPos - lightPos);
             
+            float abs = max(0, dot(screenSpaceDir, o.Normal));
+            float shine = pow(abs, _Shininess);
+
             // Albedo comes from a texture tinted by color
             fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
-            // Metallic and smoothness come from slider variables
-            o.Metallic = _Metallic;
-            o.Smoothness = _Glossiness;
             o.Alpha = c.a;
-            o.Emission = shine * tex2D(_specular, IN.uv_MainTex).rgb;
-            o.Albedo = tex2D(_MainTex, IN.uv_MainTex).rgb;
             
+            o.Emission = tex2D(_Specular, IN.uv_MainTex).rgb * shine;
+            o.Albedo = tex2D(_MainTex, IN.uv_MainTex).rgb * c.rgb;
         }
         ENDCG
     }
