@@ -23,12 +23,12 @@ Shader "Custom/Specularity"
 
         struct Input
         {
-            float2 uv_MainTex;
+            fixed2 uv_MainTex;
             float3 WorldPos;
-            float3 _LightPos;
+            float3 worldNormal;
+            
         };
 
-        float2 _Metallic;
         fixed4 _Color;
         float _Shininess;
         sampler2D _Specular;
@@ -42,22 +42,13 @@ Shader "Custom/Specularity"
 
         void surf (Input IN, inout SurfaceOutputStandard o)
         {
-            // get the direction from the light to the surface
-            float3 lightPos = normalize(_WorldSpaceLightPos0 - IN.WorldPos);
-            // get the direction from the camera to the surface
-            float3 screenPos = normalize(_WorldSpaceCameraPos - IN.WorldPos);
-            // get the angle between the light and surface directions
-            float3 screenSpaceDir = normalize(screenPos - lightPos);
-            
-            float abs = max(0, dot(screenSpaceDir, o.Normal));
-            float shine = pow(abs, _Shininess);
-
+            float3 camPos = _WorldSpaceCameraPos;
+            float3 viewDir = normalize(camPos - IN.WorldPos);
             // Albedo comes from a texture tinted by color
             fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
             o.Alpha = c.a;
-            
-            o.Emission = tex2D(_Specular, IN.uv_MainTex).rgb * shine;
-            o.Albedo = tex2D(_MainTex, IN.uv_MainTex).rgb * c.rgb;
+            //o.Emission = tex2D(_Specular, IN.uv_MainTex).rgb;
+            o.Albedo = tex2D(_MainTex, IN.uv_MainTex).rgb * viewDir;
         }
         ENDCG
     }
